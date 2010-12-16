@@ -1,0 +1,238 @@
+---
+abstract: 'Dynamically add stopwords to your woven pod'
+author:
+  - 'Randy Stauner <rwstauner@cpan.org>'
+build_requires:
+  Exporter: 0
+  File::Find: 0
+  File::Temp: 0
+  Moose::Autobox: 0.10
+  PPI: 0
+  Pod::Elemental: 0
+  Pod::Elemental::Selectors: 0
+  Pod::Elemental::Transformer::Nester: 0
+  Pod::Elemental::Transformer::Pod5: 0
+  Pod::Weaver: 0
+  Software::License::Perl_5: 0
+  Test::Differences: 0
+  Test::More: 0.96
+configure_requires:
+  ExtUtils::MakeMaker: 6.31
+dynamic_config: 0
+generated_by: 'Dist::Zilla version 4.200000, CPAN::Meta::Converter version 2.102400'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Pod-Weaver-Plugin-StopWords
+no_index:
+  directory:
+    - corpus
+    - examples
+    - inc
+    - share
+    - t
+    - xt
+provides:
+  Pod::Weaver::Plugin::StopWords:
+    file: lib/Pod/Weaver/Plugin/StopWords.pm
+    version: 1.000001
+requires:
+  Moose: 0
+  Moose::Autobox: 0
+  Pod::Weaver::Role::Finalizer: 0
+  namespace::autoclean: 0
+  perl: 5.006
+resources:
+  bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Pod-Weaver-Plugin-StopWords
+  homepage: http://github.com/magnificent-tears/Pod-Weaver-Plugin-StopWords/tree
+  repository: git://github.com/magnificent-tears/Pod-Weaver-Plugin-StopWords.git
+version: 1.000001
+x_Dist_Zilla:
+  plugins:
+    -
+      class: Dist::Zilla::Plugin::Git::DescribeVersion
+      name: '@GopherRepellent/Git::DescribeVersion'
+      version: 1.001005
+    -
+      class: Dist::Zilla::Plugin::GatherDir
+      name: '@GopherRepellent/GatherDir'
+      version: 4.200000
+    -
+      class: Dist::Zilla::Plugin::PruneCruft
+      name: '@GopherRepellent/PruneCruft'
+      version: 4.200000
+    -
+      class: Dist::Zilla::Plugin::ManifestSkip
+      name: '@GopherRepellent/ManifestSkip'
+      version: 4.200000
+    -
+      class: Dist::Zilla::Plugin::Authority
+      name: '@GopherRepellent/Authority'
+      version: 1.001
+    -
+      class: Dist::Zilla::Plugin::PkgVersion
+      name: '@GopherRepellent/PkgVersion'
+      version: 4.200000
+    -
+      class: Dist::Zilla::Plugin::PodWeaver
+      name: '@GopherRepellent/PodWeaver'
+      version: 3.101641
+    -
+      class: Dist::Zilla::Plugin::License
+      name: '@GopherRepellent/License'
+      version: 4.200000
+    -
+      class: Dist::Zilla::Plugin::Readme
+      name: '@GopherRepellent/Readme'
+      version: 4.200000
+    -
+      class: Dist::Zilla::Plugin::GitFmtChanges
+      name: '@GopherRepellent/GitFmtChanges'
+      version: 0.003
+    -
+      class: Dist::Zilla::Plugin::Bugtracker
+      name: '@GopherRepellent/Bugtracker'
+      version: 1.102670
+    -
+      class: Dist::Zilla::Plugin::Repository
+      name: '@GopherRepellent/Repository'
+      version: 0.16
+    -
+      class: Dist::Zilla::Plugin::GithubMeta
+      name: '@GopherRepellent/GithubMeta'
+      version: 0.10
+    -
+      class: Dist::Zilla::Plugin::AutoPrereqs
+      name: '@GopherRepellent/AutoPrereqs'
+      version: 4.200000
+    -
+      class: Dist::Zilla::Plugin::MetaNoIndex
+      name: '@GopherRepellent/MetaNoIndex'
+      version: 1.101550
+    -
+      class: Dist::Zilla::Plugin::MetaProvides::Package
+      name: '@GopherRepellent/MetaProvides::Package'
+      version: 1.12044908
+    -
+      class: Dist::Zilla::Plugin::MinimumPerl
+      name: '@GopherRepellent/MinimumPerl'
+      version: 0.02
+    -
+      class: Dist::Zilla::Plugin::MetaConfig
+      name: '@GopherRepellent/MetaConfig'
+      version: 4.200000
+    -
+      class: Dist::Zilla::Plugin::MetaYAML
+      name: '@GopherRepellent/MetaYAML'
+      version: 4.200000
+    -
+      class: Dist::Zilla::Plugin::MetaJSON
+      name: '@GopherRepellent/MetaJSON'
+      version: 4.200000
+    -
+      class: Dist::Zilla::Plugin::Prereqs
+      config:
+        Dist::Zilla::Plugin::Prereqs:
+          phase: test
+          type: requires
+      name: '@GopherRepellent/TestMoreWithSubtests'
+      version: 4.200000
+    -
+      class: Dist::Zilla::Plugin::ExtraTests
+      name: '@GopherRepellent/ExtraTests'
+      version: 4.200000
+    -
+      class: Dist::Zilla::Plugin::ExecDir
+      name: '@GopherRepellent/ExecDir'
+      version: 4.200000
+    -
+      class: Dist::Zilla::Plugin::ShareDir
+      name: '@GopherRepellent/ShareDir'
+      version: 4.200000
+    -
+      class: Dist::Zilla::Plugin::MakeMaker
+      name: '@GopherRepellent/MakeMaker'
+      version: 4.200000
+    -
+      class: Dist::Zilla::Plugin::CompileTests
+      name: '@GopherRepellent/CompileTests'
+      version: 1.103030
+    -
+      class: Dist::Zilla::Plugin::MetaTests
+      name: '@GopherRepellent/MetaTests'
+      version: 4.200000
+    -
+      class: Dist::Zilla::Plugin::PodSyntaxTests
+      name: '@GopherRepellent/PodSyntaxTests'
+      version: 4.200000
+    -
+      class: Dist::Zilla::Plugin::PodCoverageTests
+      name: '@GopherRepellent/PodCoverageTests'
+      version: 4.200000
+    -
+      class: Dist::Zilla::Plugin::PodLinkTests
+      name: '@GopherRepellent/PodLinkTests'
+      version: 1.003005
+    -
+      class: Dist::Zilla::Plugin::PodSpellingTests
+      name: '@GopherRepellent/PodSpellingTests'
+      version: 1.101420
+    -
+      class: Dist::Zilla::Plugin::PortabilityTests
+      name: '@GopherRepellent/PortabilityTests'
+      version: 1.101420
+    -
+      class: Dist::Zilla::Plugin::KwaliteeTests
+      name: '@GopherRepellent/KwaliteeTests'
+      version: 1.101420
+    -
+      class: Dist::Zilla::Plugin::MinimumVersionTests
+      name: '@GopherRepellent/MinimumVersionTests'
+      version: 1.101421
+    -
+      class: Dist::Zilla::Plugin::Manifest
+      name: '@GopherRepellent/Manifest'
+      version: 4.200000
+    -
+      class: Dist::Zilla::Plugin::TestRelease
+      name: '@GopherRepellent/TestRelease'
+      version: 4.200000
+    -
+      class: Dist::Zilla::Plugin::ConfirmRelease
+      name: '@GopherRepellent/ConfirmRelease'
+      version: 4.200000
+    -
+      class: Dist::Zilla::Plugin::UploadToCPAN
+      name: '@GopherRepellent/UploadToCPAN'
+      version: 4.200000
+    -
+      class: Dist::Zilla::Plugin::Prereqs
+      config:
+        Dist::Zilla::Plugin::Prereqs:
+          phase: runtime
+          type: suggests
+      name: RuntimeSuggests
+      version: 4.200000
+    -
+      class: Dist::Zilla::Plugin::FinderCode
+      name: ':InstallModules'
+      version: 4.200000
+    -
+      class: Dist::Zilla::Plugin::FinderCode
+      name: ':TestFiles'
+      version: 4.200000
+    -
+      class: Dist::Zilla::Plugin::FinderCode
+      name: ':ExecFiles'
+      version: 4.200000
+    -
+      class: Dist::Zilla::Plugin::FinderCode
+      name: ':ShareFiles'
+      version: 4.200000
+  zilla:
+    class: Dist::Zilla::Dist::Builder
+    config:
+      is_trial: 0
+    version: 4.200000
+x_authority: cpan:RWSTAUNER

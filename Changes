@@ -1,0 +1,98 @@
+Revision History for Pod-Weaver-Plugin-StopWords
+================================================
+
+1.000001
+--------
+
+09aca43 Point section link to actual attribute name (not alias)
+
+v1.0 2010-12-16
+---------------
+
+07a94de Use new, simpler, more sane (instance-style) stash API
+
+b5fb2f4 Just "use lib 't/lib'" instead of using FindBin
+
+deb7f4f Change head from DESCRIPTION to module name
+
+7bb3ecb Reflect new Stash::PodWeaver API (hashref of options)
+
+v0.5 2010-11-28
+---------------
+
+6b30674 Use Dist::Zilla::Stash::PodWeaver to get more configuration
+
+459e5ad Add example weaver.ini in examples section
+
+a11077d Document internal methods, add See Also list, and reflect attribute name change in Synopsis
+
+6ab1e4a Document 'include_authors' attribute and improve POD consistency for 'include' and 'wrap'
+
+8c83224 Add 'exclude' attribute and rename 'stopwords' to 'include' for consistency
+
+01f631f Add separate_stopwords() method to centralize the logic of flattening and splitting
+
+v0.4 2010-11-28
+---------------
+
+450845f Change author_stopwords() and splice_stopwords_from_children() to be methods
+
+b98ac47 Adjust the test files to account for Author names now being included
+
+d80a20a Include Author names as stopwords
+
+fca11bf Split on spaces once at the very end
+
+1c71901 Fix typo in POD (the whole reason for making this module)
+
+01fa733 Explicitly type stopwords attribute as an arrayref of strings (rather than just arrayref)
+
+dcb5b42 Remove =attr commands from test pod to satisfy kwalitee pod test
+
+36d7097 Test 'wrap = 0' to disable wrapping
+
+013f5b7 Rename test pod files to drop the 'basic.' prefix
+
+4b48578 Document attributes in POD
+
+v0.3 2010-11-26
+---------------
+
+8a1db2a Use Text::Wrap to wrap the stopwords paragraph (if available)
+
+615f380 Remove duplicate stopwords
+
+8e523cc Use a method to format the stopwords paragraph
+
+2736009 Test separate ini configs with more in/out pod
+
+db34621 Do another 'basic' test (1 with and 1 without stopwords)
+
+94c7228 Alias 'gather' to 'collect' in case that sounds more appropriate to anybody
+
+57faee1 Change basic.t to use default config and add ini-config.t to use the weaver.ini
+
+27977cc Alter test_basic() to accept expected stopwords and modify tests accordingly
+
+bcef759 Plagiarize some test files from Pod-Weaver-3.101632
+
+v0.2 2010-11-26
+---------------
+
+8592ced Make stopwords attribute an arrayref (so it can be specified multiple times)
+
+893f8db Filter out blanks before checking for the length of @stopwords
+
+42f8ade Add TODO Comment about getting more stopwords from dist-zilla
+
+11fe54a Ignore default stopwords if blank
+
+3239f89 Copy Description section to a README to make github happy
+
+aab5049 Add Description section to POD
+
+c777a82 Add TODO comments for desired features
+
+===================================
+End of changes in the last 365 days
+===================================
