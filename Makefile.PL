@@ -15,15 +15,15 @@ my %WriteMakefileArgs = (
     'Exporter' => '0',
     'File::Find' => '0',
     'File::Temp' => '0',
+    'ExtUtils::MakeMaker' => '6.31',
     'Moose::Autobox' => '0.10',
     'PPI' => '0',
-    'Pod::Elemental' => '0',
+    'Pod::Elemental' => '0.102360',
     'Pod::Elemental::Selectors' => '0',
     'Pod::Elemental::Transformer::Nester' => '0',
     'Pod::Elemental::Transformer::Pod5' => '0',
-    'Pod::Weaver' => '0',
     'Software::License::Perl_5' => '0',
-    'Test::Differences' => '0',
+    'Test::Differences' => '0.500',
     'Test::More' => '0.96'
   },
   'CONFIGURE_REQUIRES' => {
@@ -36,10 +36,11 @@ my %WriteMakefileArgs = (
   'PREREQ_PM' => {
     'Moose' => '0',
     'Moose::Autobox' => '0',
+    'Pod::Weaver' => '3.101632',
     'Pod::Weaver::Role::Finalizer' => '0',
     'namespace::autoclean' => '0'
   },
-  'VERSION' => '1.000001',
+  'VERSION' => '1.000002',
   'test' => {
     'TESTS' => 't/*.t'
   }

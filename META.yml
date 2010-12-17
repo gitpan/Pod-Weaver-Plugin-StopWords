@@ -6,18 +6,18 @@ build_requires:
   Exporter: 0
   File::Find: 0
   File::Temp: 0
+  Module::Build: 0.3601
   Moose::Autobox: 0.10
   PPI: 0
-  Pod::Elemental: 0
+  Pod::Elemental: 0.102360
   Pod::Elemental::Selectors: 0
   Pod::Elemental::Transformer::Nester: 0
   Pod::Elemental::Transformer::Pod5: 0
-  Pod::Weaver: 0
   Software::License::Perl_5: 0
-  Test::Differences: 0
+  Test::Differences: 0.500
   Test::More: 0.96
 configure_requires:
-  ExtUtils::MakeMaker: 6.31
+  Module::Build: 0.3601
 dynamic_config: 0
 generated_by: 'Dist::Zilla version 4.200000, CPAN::Meta::Converter version 2.102400'
 license: perl
@@ -36,10 +36,11 @@ no_index:
 provides:
   Pod::Weaver::Plugin::StopWords:
     file: lib/Pod/Weaver/Plugin/StopWords.pm
-    version: 1.000001
+    version: 1.000002
 requires:
   Moose: 0
   Moose::Autobox: 0
+  Pod::Weaver: 3.101632
   Pod::Weaver::Role::Finalizer: 0
   namespace::autoclean: 0
   perl: 5.006
@@ -47,13 +48,13 @@ resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Pod-Weaver-Plugin-StopWords
   homepage: http://github.com/magnificent-tears/Pod-Weaver-Plugin-StopWords/tree
   repository: git://github.com/magnificent-tears/Pod-Weaver-Plugin-StopWords.git
-version: 1.000001
+version: 1.000002
 x_Dist_Zilla:
   plugins:
     -
       class: Dist::Zilla::Plugin::Git::DescribeVersion
       name: '@GopherRepellent/Git::DescribeVersion'
-      version: 1.001005
+      version: 1.001011
     -
       class: Dist::Zilla::Plugin::GatherDir
       name: '@GopherRepellent/GatherDir'
@@ -155,9 +156,21 @@ x_Dist_Zilla:
       name: '@GopherRepellent/MakeMaker'
       version: 4.200000
     -
+      class: Dist::Zilla::Plugin::ModuleBuild
+      name: '@GopherRepellent/ModuleBuild'
+      version: 4.200000
+    -
+      class: Dist::Zilla::Plugin::DualBuilders
+      name: '@GopherRepellent/DualBuilders'
+      version: 1.001
+    -
       class: Dist::Zilla::Plugin::CompileTests
       name: '@GopherRepellent/CompileTests'
       version: 1.103030
+    -
+      class: Dist::Zilla::Plugin::ReportVersions::Tiny
+      name: '@GopherRepellent/ReportVersions::Tiny'
+      version: 1.02
     -
       class: Dist::Zilla::Plugin::MetaTests
       name: '@GopherRepellent/MetaTests'

@@ -1,6 +1,6 @@
 package Pod::Weaver::Plugin::StopWords;
 BEGIN {
-  $Pod::Weaver::Plugin::StopWords::VERSION = '1.000001';
+  $Pod::Weaver::Plugin::StopWords::VERSION = '1.000002';
 }
 BEGIN {
   $Pod::Weaver::Plugin::StopWords::AUTHORITY = 'cpan:RWSTAUNER';
@@ -14,6 +14,7 @@ use Moose;
 use Moose::Autobox;
 use namespace::autoclean;
 
+use Pod::Weaver 3.101632 ();
 with 'Pod::Weaver::Role::Finalizer';
 
 sub mvp_multivalue_args { qw(exclude include) }
@@ -150,7 +151,7 @@ __PACKAGE__->meta->make_immutable;
 __END__
 =pod
 
-=for :stopwords Randy Stauner arrayrefs CPAN AnnoCPAN RT CPANTS Kwalitee diff
+=for :stopwords Randy Stauner arrayrefs CPAN AnnoCPAN RT CPANTS Kwalitee diff IRC
 
 =head1 NAME
 
@@ -158,7 +159,7 @@ Pod::Weaver::Plugin::StopWords - Dynamically add stopwords to your woven pod
 
 =head1 VERSION
 
-version 1.000001
+version 1.000002
 
 =head1 SYNOPSIS
 
@@ -289,6 +290,9 @@ You can find documentation for this module with the perldoc command.
 
 =head2 Websites
 
+The following websites have more information about this module, and may be of help to you. As always,
+in addition to those websites please use your favorite search engine to discover more resources.
+
 =over 4
 
 =item *
@@ -341,9 +345,9 @@ L<http://matrix.cpantesters.org/?dist=Pod-Weaver-Plugin-StopWords>
 
 =back
 
-=head2 Bugs
+=head2 Bugs / Feature Requests
 
-Please report any bugs or feature requests to C<bug-pod-weaver-plugin-stopwords at rt.cpan.org>, or through
+Please report any bugs or feature requests by email to C<bug-pod-weaver-plugin-stopwords at rt.cpan.org>, or through
 the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Pod-Weaver-Plugin-StopWords>.  I will be
 notified, and then you'll automatically be notified of progress on your bug as I make changes.
 
