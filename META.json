@@ -60,6 +60,7 @@
             "Pod::Elemental::Transformer::Pod5" : 0,
             "Software::License::Perl_5" : 0,
             "Test::Differences" : "0.500",
+            "Test::MockObject" : "1.09",
             "Test::More" : "0.96"
          }
       }
@@ -67,7 +68,7 @@
    "provides" : {
       "Pod::Weaver::Plugin::StopWords" : {
          "file" : "lib/Pod/Weaver/Plugin/StopWords.pm",
-         "version" : "1.000002"
+         "version" : "1.001005"
       }
    },
    "release_status" : "stable",
@@ -83,7 +84,7 @@
          "web" : "http://github.com/magnificent-tears/Pod-Weaver-Plugin-StopWords/tree"
       }
    },
-   "version" : "1.000002",
+   "version" : "1.001005",
    "x_Dist_Zilla" : {
       "plugins" : [
          {
@@ -235,7 +236,7 @@
          {
             "class" : "Dist::Zilla::Plugin::ReportVersions::Tiny",
             "name" : "@GopherRepellent/ReportVersions::Tiny",
-            "version" : "1.02"
+            "version" : "1.03"
          },
          {
             "class" : "Dist::Zilla::Plugin::MetaTests",

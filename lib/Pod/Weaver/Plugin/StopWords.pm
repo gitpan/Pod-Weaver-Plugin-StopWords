@@ -1,6 +1,6 @@
 package Pod::Weaver::Plugin::StopWords;
 BEGIN {
-  $Pod::Weaver::Plugin::StopWords::VERSION = '1.000002';
+  $Pod::Weaver::Plugin::StopWords::VERSION = '1.001005';
 }
 BEGIN {
   $Pod::Weaver::Plugin::StopWords::AUTHORITY = 'cpan:RWSTAUNER';
@@ -18,7 +18,12 @@ use Pod::Weaver 3.101632 ();
 with 'Pod::Weaver::Role::Finalizer';
 
 sub mvp_multivalue_args { qw(exclude include) }
-sub mvp_aliases { return { collect => 'gather', stopwords => 'include' } }
+sub mvp_aliases { return {
+	collect                    => 'gather',
+	include_author             => 'include_authors',
+	include_copyright_holders  => 'include_copyright_holder',
+	stopwords                  => 'include'
+} }
 
 has exclude => (
     is      => 'rw',
@@ -44,6 +49,12 @@ has include_authors => (
 	default => 1
 );
 
+has include_copyright_holder => (
+	is      => 'rw',
+	isa     => 'Bool',
+	default => 1
+);
+
 has wrap => (
 	is      => 'rw',
 	isa     => 'Int',
@@ -54,6 +65,7 @@ has wrap => (
 sub finalize_document {
     my ($self, $document, $input) = @_;
 
+	# are we weaving under Dist::Zilla?
 	my $zilla = ($input && $input->{zilla});
 
 	# our attributes are read-write
@@ -63,16 +75,31 @@ sub finalize_document {
 
 	my @stopwords = @{$self->include};
 
-	if( $input->{authors} ){
-		unshift(@stopwords, $self->author_stopwords($input->{authors}))
-			if $self->include_authors;
+	# the attributes are probably the same between $input and $zilla,
+	# but we'll add them both just in case. (duplicates are removed later.)
+
+	if( $self->include_copyright_holder ){
+		my @holders;
+
+		push(@holders, $input->{license}->holder)
+			if $input->{license};
+		push(@holders, $zilla->copyright_holder)
+			if $zilla;
+
+		unshift(@stopwords, $self->separate_stopwords(@holders))
+			if @holders;
 	}
 
-	if( $zilla ){
-		# these are probably the same authors as above, but just in case
-		# we'll add these, too (we remove duplicates later so it's ok)
-		unshift(@stopwords, $self->author_stopwords($zilla->{authors}))
-			if $self->include_authors;
+	if( $self->include_authors ){
+		my @authors;
+
+		push(@authors, $input->{authors})
+			if $input->{authors};
+		push(@authors, $zilla->authors)
+			if $zilla;
+
+		unshift(@stopwords, $self->author_stopwords(@authors))
+			if @authors;
 	}
 
 	# TODO: keep different sections as separate lines
@@ -159,7 +186,7 @@ Pod::Weaver::Plugin::StopWords - Dynamically add stopwords to your woven pod
 
 =head1 VERSION
 
-version 1.000002
+version 1.001005
 
 =head1 SYNOPSIS
 
@@ -180,6 +207,19 @@ L<stopwords|/include> specified in the plugin config (F<weaver.ini>).
 Additionally the plugin can gather any other stopwords
 listed in the POD and compile them all into one paragraph
 at the top of the document.
+
+=head2 Using with Dist::Zilla
+
+If you're using L<Dist::Zilla> this plugin will check for the
+C<%PodWeaver> Stash (L<Dist::Zilla::Stash::PodWeaver>)
+and load any additional configuration found there.
+So you can specify additional stopwords
+(or any other attributes) in your F<dist.ini>:
+
+	; dist.ini
+	[@YourFavoriteBundle]
+	[%PodWeaver]
+	-StopWords:include = favorite_fake_word
 
 =head1 ATTRIBUTES
 
@@ -202,7 +242,7 @@ put any new stopwords in a new paragraph at the top.
 
 Defaults to true.
 
-Aliased as I<collect>.
+Aliased as C<collect>.
 
 =head2 include
 
@@ -210,7 +250,7 @@ List of stopwords to include.
 
 This can be set multiple times.
 
-Aliased as I<stopwords>.
+Aliased as C<stopwords>.
 
 =head2 include_authors
 
@@ -221,16 +261,28 @@ developing this plugin.
 
 Defaults to true.
 
+=head2 include_copyright_holder
+
+A boolean value to indicate whether or not to include stopwords for
+the license/copyright holder.  This can be different than the author
+and will show up in the default LICENSE Section.
+
+This way you don't have to remember to put your company name
+into the L<%PodWeaver Stash|Dist::Zilla::Stash::PodWeaver>
+for every single F<dist.ini> you have at C<$work>.
+
+Defaults to true.
+
 =head2 wrap
 
 This is an integer for the number of columns at which to wrap the resulting
 paragraph.
 
-It defaults to I<76> which is the default in
+It defaults to C<76> which is the default in
 L<Text::Wrap> (version 2009.0305).
 
 No wrapping will be done if L<Text::Wrap> is not found
-or if you set this value to I<0>.
+or if you set this value to C<0>.
 
 =head1 METHODS
 
@@ -279,6 +331,10 @@ L<Test::Spelling>
 =item *
 
 L<Dist::Zilla::Plugin::PodSpellingTests>
+
+=item *
+
+L<Dist::Zilla::Stash::PodWeaver>
 
 =back
 

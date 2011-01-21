@@ -1,8 +1,25 @@
 Revision History for Pod-Weaver-Plugin-StopWords
 ================================================
 
-1.000002
+1.001005
 --------
+
+717287f Test for copyright_holder (and Dist::Zilla)
+
+0203be6 Change I to C when referencing string values
+
+2b91c50 Add a section to describe usage with DZ %PodWeaver
+
+8c599c6 Clarify copyright holder documentation
+
+cc653fc Alias author/copyright_holder attributes to plural variations
+
+v1.1 2011-01-20
+---------------
+
+87deb93 Add include_copyright_holder attribute to complement include_authors
+
+f88f7b5 Expand mvp_aliases hashref for future updates
 
 4f14b50 Specify required versions
 

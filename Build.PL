@@ -19,6 +19,7 @@ my %module_build_args = (
     'Pod::Elemental::Transformer::Pod5' => '0',
     'Software::License::Perl_5' => '0',
     'Test::Differences' => '0.500',
+    'Test::MockObject' => '1.09',
     'Test::More' => '0.96'
   },
   'configure_requires' => {
@@ -29,7 +30,7 @@ my %module_build_args = (
     'Randy Stauner <rwstauner@cpan.org>'
   ],
   'dist_name' => 'Pod-Weaver-Plugin-StopWords',
-  'dist_version' => '1.000002',
+  'dist_version' => '1.001005',
   'license' => 'perl',
   'module_name' => 'Pod::Weaver::Plugin::StopWords',
   'recommends' => {},

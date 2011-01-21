@@ -63,6 +63,7 @@ eval { $v .= pmver('Pod::Weaver','3.101632') };
 eval { $v .= pmver('Pod::Weaver::Role::Finalizer','any version') };
 eval { $v .= pmver('Software::License::Perl_5','any version') };
 eval { $v .= pmver('Test::Differences','0.500') };
+eval { $v .= pmver('Test::MockObject','1.09') };
 eval { $v .= pmver('Test::More','0.96') };
 eval { $v .= pmver('Text::Wrap','any version') };
 eval { $v .= pmver('namespace::autoclean','any version') };

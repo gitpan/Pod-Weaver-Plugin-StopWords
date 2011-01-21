@@ -15,6 +15,7 @@ build_requires:
   Pod::Elemental::Transformer::Pod5: 0
   Software::License::Perl_5: 0
   Test::Differences: 0.500
+  Test::MockObject: 1.09
   Test::More: 0.96
 configure_requires:
   Module::Build: 0.3601
@@ -36,7 +37,7 @@ no_index:
 provides:
   Pod::Weaver::Plugin::StopWords:
     file: lib/Pod/Weaver/Plugin/StopWords.pm
-    version: 1.000002
+    version: 1.001005
 requires:
   Moose: 0
   Moose::Autobox: 0
@@ -48,7 +49,7 @@ resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Pod-Weaver-Plugin-StopWords
   homepage: http://github.com/magnificent-tears/Pod-Weaver-Plugin-StopWords/tree
   repository: git://github.com/magnificent-tears/Pod-Weaver-Plugin-StopWords.git
-version: 1.000002
+version: 1.001005
 x_Dist_Zilla:
   plugins:
     -
@@ -170,7 +171,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::ReportVersions::Tiny
       name: '@GopherRepellent/ReportVersions::Tiny'
-      version: 1.02
+      version: 1.03
     -
       class: Dist::Zilla::Plugin::MetaTests
       name: '@GopherRepellent/MetaTests'

@@ -24,6 +24,7 @@ my %WriteMakefileArgs = (
     'Pod::Elemental::Transformer::Pod5' => '0',
     'Software::License::Perl_5' => '0',
     'Test::Differences' => '0.500',
+    'Test::MockObject' => '1.09',
     'Test::More' => '0.96'
   },
   'CONFIGURE_REQUIRES' => {
@@ -40,7 +41,7 @@ my %WriteMakefileArgs = (
     'Pod::Weaver::Role::Finalizer' => '0',
     'namespace::autoclean' => '0'
   },
-  'VERSION' => '1.000002',
+  'VERSION' => '1.001005',
   'test' => {
     'TESTS' => 't/*.t'
   }
