@@ -1,6 +1,14 @@
+#
+# This file is part of Pod-Weaver-Plugin-StopWords
+#
+# This software is copyright (c) 2010 by Randy Stauner.
+#
+# This is free software; you can redistribute it and/or modify it under
+# the same terms as the Perl 5 programming language system itself.
+#
 package Pod::Weaver::Plugin::StopWords;
 BEGIN {
-  $Pod::Weaver::Plugin::StopWords::VERSION = '1.001005';
+  $Pod::Weaver::Plugin::StopWords::VERSION = '1.002';
 }
 BEGIN {
   $Pod::Weaver::Plugin::StopWords::AUTHORITY = 'cpan:RWSTAUNER';
@@ -178,7 +186,8 @@ __PACKAGE__->meta->make_immutable;
 __END__
 =pod
 
-=for :stopwords Randy Stauner arrayrefs CPAN AnnoCPAN RT CPANTS Kwalitee diff IRC
+=for :stopwords Randy Stauner arrayrefs cpan testmatrix url annocpan anno bugtracker rt
+cpants kwalitee diff irc mailto metadata placeholders
 
 =head1 NAME
 
@@ -186,7 +195,7 @@ Pod::Weaver::Plugin::StopWords - Dynamically add stopwords to your woven pod
 
 =head1 VERSION
 
-version 1.001005
+version 1.002
 
 =head1 SYNOPSIS
 
@@ -340,6 +349,8 @@ L<Dist::Zilla::Stash::PodWeaver>
 
 =head1 SUPPORT
 
+=head2 Perldoc
+
 You can find documentation for this module with the perldoc command.
 
   perldoc Pod::Weaver::Plugin::StopWords
@@ -404,8 +415,8 @@ L<http://matrix.cpantesters.org/?dist=Pod-Weaver-Plugin-StopWords>
 =head2 Bugs / Feature Requests
 
 Please report any bugs or feature requests by email to C<bug-pod-weaver-plugin-stopwords at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Pod-Weaver-Plugin-StopWords>.  I will be
-notified, and then you'll automatically be notified of progress on your bug as I make changes.
+the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Pod-Weaver-Plugin-StopWords>. You will be automatically notified of any
+progress on the request by the system.
 
 =head2 Source Code
 

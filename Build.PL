@@ -30,7 +30,7 @@ my %module_build_args = (
     'Randy Stauner <rwstauner@cpan.org>'
   ],
   'dist_name' => 'Pod-Weaver-Plugin-StopWords',
-  'dist_version' => '1.001005',
+  'dist_version' => '1.002',
   'license' => 'perl',
   'module_name' => 'Pod::Weaver::Plugin::StopWords',
   'recommends' => {},

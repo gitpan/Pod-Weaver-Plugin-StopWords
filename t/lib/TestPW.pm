@@ -1,3 +1,11 @@
+#
+# This file is part of Pod-Weaver-Plugin-StopWords
+#
+# This software is copyright (c) 2010 by Randy Stauner.
+#
+# This is free software; you can redistribute it and/or modify it under
+# the same terms as the Perl 5 programming language system itself.
+#
 package TestPW;
 use strict;
 use warnings;
@@ -6,7 +14,7 @@ our @ISA = qw(Exporter);
 our @EXPORT = qw(slurp_file test_basic weaver_input);
 our $Data = do { local $/; <DATA> };
 
-use Test::More;
+use Test::More 0.96;
 use Test::Differences 0.500;
 use Test::MockObject 1.09;
 use Moose::Autobox 0.10;
@@ -26,6 +34,8 @@ $zilla->set_always(license => Software::License::Perl_5->new({ holder => 'DZHold
 $zilla->set_always(authors => ['DZAuth Stauner <rwstauner@cpan.org>']);
 $zilla->set_always(stash_named => undef);
 $zilla->mock(copyright_holder => sub { $_[0]->license->holder });
+# proposed changes to Pod::Weaver::Section::Legal look for a license file.  we can ignore that for these tests.
+$zilla->set_always(files => []);
 
 sub slurp_file { local (@ARGV, $/) = @_; <> }
 

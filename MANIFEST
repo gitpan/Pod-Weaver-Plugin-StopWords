@@ -26,6 +26,7 @@ t/ini-nowrap/in.pod
 t/ini-nowrap/out.pod
 t/ini-nowrap/weaver.ini
 t/lib/TestPW.pm
+t/release-cpan-changes.t
 t/release-distmeta.t
 t/release-kwalitee.t
 t/release-minimum-version.t
