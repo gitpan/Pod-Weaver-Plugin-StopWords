@@ -1,3 +1,4 @@
+# vim: set ts=2 sts=2 sw=2 expandtab smarttab:
 #
 # This file is part of Pod-Weaver-Plugin-StopWords
 #
@@ -6,9 +7,11 @@
 # This is free software; you can redistribute it and/or modify it under
 # the same terms as the Perl 5 programming language system itself.
 #
+use strict;
+use warnings;
 package Pod::Weaver::Plugin::StopWords;
 BEGIN {
-  $Pod::Weaver::Plugin::StopWords::VERSION = '1.002';
+  $Pod::Weaver::Plugin::StopWords::VERSION = '1.003';
 }
 BEGIN {
   $Pod::Weaver::Plugin::StopWords::AUTHORITY = 'cpan:RWSTAUNER';
@@ -16,8 +19,6 @@ BEGIN {
 # ABSTRACT: Dynamically add stopwords to your woven pod
 
 
-use strict;
-use warnings;
 use Moose;
 use Moose::Autobox;
 use namespace::autoclean;
@@ -27,154 +28,161 @@ with 'Pod::Weaver::Role::Finalizer';
 
 sub mvp_multivalue_args { qw(exclude include) }
 sub mvp_aliases { return {
-	collect                    => 'gather',
-	include_author             => 'include_authors',
-	include_copyright_holders  => 'include_copyright_holder',
-	stopwords                  => 'include'
+  collect                    => 'gather',
+  include_author             => 'include_authors',
+  include_copyright_holders  => 'include_copyright_holder',
+  stopwords                  => 'include'
 } }
 
 has exclude => (
-    is      => 'rw',
-    isa     => 'ArrayRef[Str]',
-    default => sub { [] },
+  is      => 'rw',
+  isa     => 'ArrayRef[Str]',
+  default => sub { [] },
 );
 
 has gather => (
-	is      => 'rw',
-	isa     => 'Bool',
-	default => 1
+  is      => 'rw',
+  isa     => 'Bool',
+  default => 1
 );
 
 has include => (
-    is      => 'rw',
-    isa     => 'ArrayRef[Str]',
-    default => sub { [] },
+  is      => 'rw',
+  isa     => 'ArrayRef[Str]',
+  default => sub { [] },
 );
 
 has include_authors => (
-	is      => 'rw',
-	isa     => 'Bool',
-	default => 1
+  is      => 'rw',
+  isa     => 'Bool',
+  default => 1
 );
 
 has include_copyright_holder => (
-	is      => 'rw',
-	isa     => 'Bool',
-	default => 1
+  is      => 'rw',
+  isa     => 'Bool',
+  default => 1
 );
 
 has wrap => (
-	is      => 'rw',
-	isa     => 'Int',
-	default => 76
+  is      => 'rw',
+  isa     => 'Int',
+  default => 76
 );
 
 
 sub finalize_document {
-    my ($self, $document, $input) = @_;
+  my ($self, $document, $input) = @_;
 
-	# are we weaving under Dist::Zilla?
-	my $zilla = ($input && $input->{zilla});
+  # are we weaving under Dist::Zilla?
+  my $zilla = ($input && $input->{zilla});
 
-	# our attributes are read-write
-	if( $zilla and my $stash = $zilla->stash_named('%PodWeaver') ){
-		$stash->merge_stashed_config($self);
-	}
+  # our attributes are read-write
+  if( $zilla and my $stash = $zilla->stash_named('%PodWeaver') ){
+    $stash->merge_stashed_config($self);
+  }
 
-	my @stopwords = @{$self->include};
+  my @stopwords = @{$self->include};
 
-	# the attributes are probably the same between $input and $zilla,
-	# but we'll add them both just in case. (duplicates are removed later.)
+  # the attributes are probably the same between $input and $zilla,
+  # but we'll add them both just in case. (duplicates are removed later.)
 
-	if( $self->include_copyright_holder ){
-		my @holders;
+  if( $self->include_copyright_holder ){
+    my @holders;
 
-		push(@holders, $input->{license}->holder)
-			if $input->{license};
-		push(@holders, $zilla->copyright_holder)
-			if $zilla;
+    push(@holders, $input->{license}->holder)
+      if $input->{license};
+    push(@holders, $zilla->copyright_holder)
+      if $zilla;
 
-		unshift(@stopwords, $self->separate_stopwords(@holders))
-			if @holders;
-	}
+    unshift(@stopwords, $self->separate_stopwords(@holders))
+      if @holders;
+  }
 
-	if( $self->include_authors ){
-		my @authors;
+  if( $self->include_authors ){
+    my @authors;
 
-		push(@authors, $input->{authors})
-			if $input->{authors};
-		push(@authors, $zilla->authors)
-			if $zilla;
+    push(@authors, $input->{authors})
+      if $input->{authors};
+    push(@authors, $zilla->authors)
+      if $zilla;
 
-		unshift(@stopwords, $self->author_stopwords(@authors))
-			if @authors;
-	}
+    unshift(@stopwords, $self->author_stopwords(@authors))
+      if @authors;
+  }
 
-	# TODO: keep different sections as separate lines
-	push(@stopwords, $self->splice_stopwords_from_children($document->children))
-		if $self->gather;
+  if ( $self->gather ) {
+    # TODO: keep different sections as separate lines
+    push(@stopwords, $self->splice_stopwords_from_children($document->children));
 
-	my %seen;
-	$seen{$_} = 1 foreach $self->separate_stopwords($self->exclude);
+    # Search the leftovers for more stopwords
+    push(@stopwords, $self->splice_stopwords_from_children($input->{pod_document}->children));
+  }
 
-	@stopwords = grep { $_ && !$seen{$_}++ }
-		$self->separate_stopwords(@stopwords);
+  my %seen;
+  $seen{$_} = 1 foreach $self->separate_stopwords($self->exclude);
 
-	return unless @stopwords;
+  @stopwords = grep { $_ && !$seen{$_}++ }
+    $self->separate_stopwords(@stopwords);
 
-    $document->children->unshift(
-        Pod::Elemental::Element::Pod5::Command->new({
-            command => 'for :stopwords',
-            content => $self->format_stopwords(\@stopwords)
-        }),
-    );
+  return unless @stopwords;
+
+  $document->children->unshift(
+    Pod::Elemental::Element::Pod5::Command->new({
+      command => 'for :stopwords',
+      content => $self->format_stopwords(\@stopwords)
+    }),
+  );
 }
 
 
 sub author_stopwords {
-	my $self = shift;
-	return grep { !/^<\S+\@\S+\.\S+>$/ } $self->separate_stopwords(@_);
+  my $self = shift;
+  return grep { !/^<\S+\@\S+\.\S+>$/ } $self->separate_stopwords(@_);
 }
 
 
 sub format_stopwords {
-	my ($self, $stopwords) = @_;
-	my $paragraph = join(' ', @$stopwords);
+  my ($self, $stopwords) = @_;
+  my $paragraph = join(' ', @$stopwords);
 
-	return $paragraph
-		unless $self->wrap && eval "require Text::Wrap";
+  # considered making a lazy _can_wrap attribute that defaults to eval require
+  # but decided that would probably be less efficient.
 
-	local $Text::Wrap::columns = $self->wrap;
-	return Text::Wrap::wrap('', '', $paragraph);
+  return $paragraph
+    unless $self->wrap && eval { require Text::Wrap; };
+
+  local $Text::Wrap::columns = $self->wrap;
+  return Text::Wrap::wrap('', '', $paragraph);
 }
 
 
 sub separate_stopwords {
-	my $self = shift;
-	# flatten any array refs and split each string on spaces
-	map { split /\s+/ } map { ref($_) ? @$_ : $_ } @_;
+  my $self = shift;
+  # flatten any array refs and split each string on spaces
+  map { split /\s+/ } map { ref($_) ? @$_ : $_ } @_;
 }
 
 
 sub splice_stopwords_from_children {
-    my ($self, $children) = @_;
-	my @stopwords;
+  my ($self, $children) = @_;
+  my @stopwords;
 
-	CHILDREN: foreach my $i ( 0 .. (@$children - 1) ){
-		next unless my $para = $children->[$i];
-		next unless $para->isa('Pod::Elemental::Element::Pod5::Region')
-			and $para->format_name eq 'stopwords';
+  CHILDREN: foreach my $i ( 0 .. (@$children - 1) ){
+    next unless my $para = $children->[$i];
+    next unless $para->isa('Pod::Elemental::Element::Pod5::Region')
+      and $para->format_name eq 'stopwords';
 
-		push(@stopwords,
-			map { split(/\s+/, $_->content) } $para->children->flatten);
+    push(@stopwords,
+      map { split(/\s+/, $_->content) } $para->children->flatten);
 
-		# remove paragraph from document since we've copied all of its stopwords
-		splice(@$children, $i, 1);
+    # remove paragraph from document since we've copied all of its stopwords
+    splice(@$children, $i, 1);
 
-		redo CHILDREN; # don't increment the counter
-	}
+    redo CHILDREN; # don't increment the counter
+  }
 
-	return @stopwords;
+  return @stopwords;
 }
 
 __PACKAGE__->meta->make_immutable;
@@ -195,14 +203,14 @@ Pod::Weaver::Plugin::StopWords - Dynamically add stopwords to your woven pod
 
 =head1 VERSION
 
-version 1.002
+version 1.003
 
 =head1 SYNOPSIS
 
-	# weaver.ini
-	[-StopWords]
-	gather = 1     ; default
-	include = MyExtraWord1 exword2
+  # weaver.ini
+  [-StopWords]
+  gather = 1     ; default
+  include = MyExtraWord1 exword2
 
 =head1 DESCRIPTION
 
@@ -225,10 +233,10 @@ and load any additional configuration found there.
 So you can specify additional stopwords
 (or any other attributes) in your F<dist.ini>:
 
-	; dist.ini
-	[@YourFavoriteBundle]
-	[%PodWeaver]
-	-StopWords:include = favorite_fake_word
+  ; dist.ini
+  [@YourFavoriteBundle]
+  [%PodWeaver]
+  -StopWords:include = favorite_fake_word
 
 =head1 ATTRIBUTES
 

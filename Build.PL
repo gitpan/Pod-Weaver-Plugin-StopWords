@@ -7,6 +7,7 @@ use Module::Build 0.3601;
 
 my %module_build_args = (
   'build_requires' => {
+    'English' => '0',
     'Exporter' => '0',
     'File::Find' => '0',
     'File::Temp' => '0',
@@ -30,7 +31,7 @@ my %module_build_args = (
     'Randy Stauner <rwstauner@cpan.org>'
   ],
   'dist_name' => 'Pod-Weaver-Plugin-StopWords',
-  'dist_version' => '1.002',
+  'dist_version' => '1.003',
   'license' => 'perl',
   'module_name' => 'Pod::Weaver::Plugin::StopWords',
   'recommends' => {},

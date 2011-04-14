@@ -12,6 +12,7 @@ my %WriteMakefileArgs = (
   'ABSTRACT' => 'Dynamically add stopwords to your woven pod',
   'AUTHOR' => 'Randy Stauner <rwstauner@cpan.org>',
   'BUILD_REQUIRES' => {
+    'English' => '0',
     'Exporter' => '0',
     'File::Find' => '0',
     'File::Temp' => '0',
@@ -41,7 +42,7 @@ my %WriteMakefileArgs = (
     'Pod::Weaver::Role::Finalizer' => '0',
     'namespace::autoclean' => '0'
   },
-  'VERSION' => '1.002',
+  'VERSION' => '1.003',
   'test' => {
     'TESTS' => 't/*.t'
   }
