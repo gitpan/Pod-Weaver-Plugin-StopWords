@@ -1,12 +1,4 @@
 #!perl
-
-BEGIN {
-  unless ($ENV{RELEASE_TESTING}) {
-    require Test::More;
-    Test::More::plan(skip_all => 'these tests are for release candidate testing');
-  }
-}
-
 #
 # This file is part of Pod-Weaver-Plugin-StopWords
 #
@@ -18,7 +10,7 @@ BEGIN {
 
 use Test::More;
 
-eval "use Test::DistManifest";
-plan skip_all => "Test::DistManifest required for testing the manifest"
+eval "use Test::MinimumVersion";
+plan skip_all => "Test::MinimumVersion required for testing minimum versions"
   if $@;
-manifest_ok();
+all_minimum_version_from_metayml_ok();

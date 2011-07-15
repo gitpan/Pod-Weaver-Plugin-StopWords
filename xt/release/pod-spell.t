@@ -1,12 +1,4 @@
 #!perl
-
-BEGIN {
-  unless ($ENV{RELEASE_TESTING}) {
-    require Test::More;
-    Test::More::plan(skip_all => 'these tests are for release candidate testing');
-  }
-}
-
 #
 # This file is part of Pod-Weaver-Plugin-StopWords
 #
@@ -22,10 +14,14 @@ eval "use Pod::Wordlist::hanekomu";
 plan skip_all => "Pod::Wordlist::hanekomu required for testing POD spelling"
   if $@;
 
-eval "use Test::Spelling";
-plan skip_all => "Test::Spelling required for testing POD spelling"
+eval "use Test::Spelling 0.12";
+plan skip_all => "Test::Spelling 0.12 required for testing POD spelling"
   if $@;
 
 
-
+add_stopwords(<DATA>);
 all_pod_files_spelling_ok('lib');
+__DATA__
+Randy
+Stauner
+

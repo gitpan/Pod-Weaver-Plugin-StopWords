@@ -2,9 +2,9 @@
 use strict;
 use warnings;
 
-BEGIN { require 5.006; }
+use 5.006;
 
-use ExtUtils::MakeMaker 6.31;
+use ExtUtils::MakeMaker 6.30;
 
 
 
@@ -12,11 +12,10 @@ my %WriteMakefileArgs = (
   'ABSTRACT' => 'Dynamically add stopwords to your woven pod',
   'AUTHOR' => 'Randy Stauner <rwstauner@cpan.org>',
   'BUILD_REQUIRES' => {
-    'English' => '0',
     'Exporter' => '0',
     'File::Find' => '0',
     'File::Temp' => '0',
-    'ExtUtils::MakeMaker' => '6.31',
+    'ExtUtils::MakeMaker' => '6.30',
     'Moose::Autobox' => '0.10',
     'PPI' => '0',
     'Pod::Elemental' => '0.102360',
@@ -29,7 +28,7 @@ my %WriteMakefileArgs = (
     'Test::More' => '0.96'
   },
   'CONFIGURE_REQUIRES' => {
-    'ExtUtils::MakeMaker' => '6.31'
+    'ExtUtils::MakeMaker' => '6.30'
   },
   'DISTNAME' => 'Pod-Weaver-Plugin-StopWords',
   'EXE_FILES' => [],
@@ -42,7 +41,7 @@ my %WriteMakefileArgs = (
     'Pod::Weaver::Role::Finalizer' => '0',
     'namespace::autoclean' => '0'
   },
-  'VERSION' => '1.003',
+  'VERSION' => '1.004',
   'test' => {
     'TESTS' => 't/*.t'
   }

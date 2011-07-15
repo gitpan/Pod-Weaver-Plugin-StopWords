@@ -1,12 +1,4 @@
 #!perl
-
-BEGIN {
-  unless ($ENV{RELEASE_TESTING}) {
-    require Test::More;
-    Test::More::plan(skip_all => 'these tests are for release candidate testing');
-  }
-}
-
 #
 # This file is part of Pod-Weaver-Plugin-StopWords
 #
@@ -18,7 +10,7 @@ BEGIN {
 
 use Test::More;
 
-eval "use Test::HasVersion";
-plan skip_all => "Test::HasVersion required for testing version numbers"
+eval "use Test::Portability::Files";
+plan skip_all => "Test::Portability::Files required for testing portability"
   if $@;
-all_pm_version_ok();
+run_tests();
