@@ -49,13 +49,14 @@ sub pmver {
 }
 
 eval { $v .= pmver('Exporter','any version') };
+eval { $v .= pmver('ExtUtils::MakeMaker','6.30') };
 eval { $v .= pmver('File::Find','any version') };
 eval { $v .= pmver('File::Temp','any version') };
-eval { $v .= pmver('Module::Build','0.3601') };
 eval { $v .= pmver('Moose','any version') };
 eval { $v .= pmver('Moose::Autobox','0.10') };
 eval { $v .= pmver('PPI','any version') };
 eval { $v .= pmver('Pod::Elemental','0.102360') };
+eval { $v .= pmver('Pod::Elemental::Element::Pod5::Command','any version') };
 eval { $v .= pmver('Pod::Elemental::Selectors','any version') };
 eval { $v .= pmver('Pod::Elemental::Transformer::Nester','any version') };
 eval { $v .= pmver('Pod::Elemental::Transformer::Pod5','any version') };
@@ -67,6 +68,8 @@ eval { $v .= pmver('Test::MockObject','1.09') };
 eval { $v .= pmver('Test::More','0.96') };
 eval { $v .= pmver('Text::Wrap','any version') };
 eval { $v .= pmver('namespace::autoclean','any version') };
+eval { $v .= pmver('strict','any version') };
+eval { $v .= pmver('warnings','any version') };
 
 
 

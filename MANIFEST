@@ -1,4 +1,3 @@
-Build.PL
 Changes
 LICENSE
 MANIFEST
@@ -7,6 +6,7 @@ META.json
 META.yml
 Makefile.PL
 README
+dist.ini
 examples/weaver.ini
 lib/Pod/Weaver/Plugin/StopWords.pm
 t/00-compile.t
@@ -30,11 +30,13 @@ t/ini-nowrap/in.pod
 t/ini-nowrap/out.pod
 t/ini-nowrap/weaver.ini
 t/lib/TestPW.pm
+t/lib/TestPWEncoding.pm
 xt/author/critic.t
+xt/author/pod-spell.t
+xt/author/test-eol.t
 xt/release/cpan-changes.t
 xt/release/dist-manifest.t
 xt/release/distmeta.t
-xt/release/eol.t
 xt/release/kwalitee.t
 xt/release/meta-json.t
 xt/release/minimum-version.t
@@ -42,7 +44,6 @@ xt/release/mojibake.t
 xt/release/no-tabs.t
 xt/release/pod-coverage.t
 xt/release/pod-linkcheck.t
-xt/release/pod-spell.t
 xt/release/pod-syntax.t
 xt/release/portability.t
 xt/release/test-version.t

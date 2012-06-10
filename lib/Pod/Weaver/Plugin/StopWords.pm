@@ -10,8 +10,8 @@
 use strict;
 use warnings;
 package Pod::Weaver::Plugin::StopWords;
-BEGIN {
-  $Pod::Weaver::Plugin::StopWords::VERSION = '1.004';
+{
+  $Pod::Weaver::Plugin::StopWords::VERSION = '1.005';
 }
 BEGIN {
   $Pod::Weaver::Plugin::StopWords::AUTHORITY = 'cpan:RWSTAUNER';
@@ -126,12 +126,23 @@ sub finalize_document {
 
   return unless @stopwords;
 
-  $document->children->unshift(
+  splice(
+    @{ $document->children },
+    # if the first pod element is the encoding directive, put stopwords after it
+    (_is_encoding_command($document->children->[0]) ? 1 : 0),
+    0,
     Pod::Elemental::Element::Pod5::Command->new({
       command => 'for :stopwords',
       content => $self->format_stopwords(\@stopwords)
     }),
   );
+
+  return;
+}
+
+sub _is_encoding_command {
+  my ($child) = @_;
+  return $child->can('command') && $child->command eq 'encoding';
 }
 
 
@@ -193,8 +204,11 @@ __PACKAGE__->meta->make_immutable;
 __END__
 =pod
 
-=for :stopwords Randy Stauner arrayrefs cpan testmatrix url annocpan anno bugtracker rt
-cpants kwalitee diff irc mailto metadata placeholders
+=for :stopwords Randy Stauner ACKNOWLEDGEMENTS arrayrefs cpan testmatrix url annocpan anno
+bugtracker rt cpants kwalitee diff irc mailto metadata placeholders
+metacpan
+
+=encoding utf-8
 
 =head1 NAME
 
@@ -202,7 +216,7 @@ Pod::Weaver::Plugin::StopWords - Dynamically add stopwords to your woven pod
 
 =head1 VERSION
 
-version 1.004
+version 1.005
 
 =head1 SYNOPSIS
 
@@ -346,7 +360,7 @@ L<Test::Spelling>
 
 =item *
 
-L<Dist::Zilla::Plugin::PodSpellingTests>
+L<Dist::Zilla::Plugin::Test::PodSpelling>
 
 =item *
 
@@ -428,9 +442,9 @@ progress on the request by the system.
 =head2 Source Code
 
 
-L<http://github.com/rwstauner/Pod-Weaver-Plugin-StopWords>
+L<https://github.com/rwstauner/Pod-Weaver-Plugin-StopWords>
 
-  git clone http://github.com/rwstauner/Pod-Weaver-Plugin-StopWords
+  git clone https://github.com/rwstauner/Pod-Weaver-Plugin-StopWords.git
 
 =head1 AUTHOR
 
