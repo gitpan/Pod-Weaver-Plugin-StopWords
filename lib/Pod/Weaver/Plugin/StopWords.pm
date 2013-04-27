@@ -11,8 +11,10 @@ use strict;
 use warnings;
 package Pod::Weaver::Plugin::StopWords;
 {
-  $Pod::Weaver::Plugin::StopWords::VERSION = '1.005';
+  $Pod::Weaver::Plugin::StopWords::VERSION = '1.006';
 }
+# git description: v1.005-1-gea023a4
+
 BEGIN {
   $Pod::Weaver::Plugin::StopWords::AUTHORITY = 'cpan:RWSTAUNER';
 }
@@ -199,16 +201,15 @@ __PACKAGE__->meta->make_immutable;
 
 1;
 
-
-
 __END__
+
 =pod
 
-=for :stopwords Randy Stauner ACKNOWLEDGEMENTS arrayrefs cpan testmatrix url annocpan anno
-bugtracker rt cpants kwalitee diff irc mailto metadata placeholders
-metacpan
-
 =encoding utf-8
+
+=for :stopwords Randy Stauner ACKNOWLEDGEMENTS Apocalypse <apocal@cpan.org> arrayrefs cpan
+testmatrix url annocpan anno bugtracker rt cpants kwalitee diff irc mailto
+metadata placeholders metacpan
 
 =head1 NAME
 
@@ -216,7 +217,7 @@ Pod::Weaver::Plugin::StopWords - Dynamically add stopwords to your woven pod
 
 =head1 VERSION
 
-version 1.005
+version 1.006
 
 =head1 SYNOPSIS
 
@@ -385,51 +386,11 @@ in addition to those websites please use your favorite search engine to discover
 
 =item *
 
-Search CPAN
+MetaCPAN
 
-The default CPAN search engine, useful to view POD in HTML format.
+A modern, open-source CPAN search engine, useful to view POD in HTML format.
 
-L<http://search.cpan.org/dist/Pod-Weaver-Plugin-StopWords>
-
-=item *
-
-RT: CPAN's Bug Tracker
-
-The RT ( Request Tracker ) website is the default bug/issue tracking system for CPAN.
-
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Pod-Weaver-Plugin-StopWords>
-
-=item *
-
-CPAN Ratings
-
-The CPAN Ratings is a website that allows community ratings and reviews of Perl modules.
-
-L<http://cpanratings.perl.org/d/Pod-Weaver-Plugin-StopWords>
-
-=item *
-
-CPAN Testers
-
-The CPAN Testers is a network of smokers who run automated tests on uploaded CPAN distributions.
-
-L<http://www.cpantesters.org/distro/P/Pod-Weaver-Plugin-StopWords>
-
-=item *
-
-CPAN Testers Matrix
-
-The CPAN Testers Matrix is a website that provides a visual overview of the test results for a distribution on various Perls/platforms.
-
-L<http://matrix.cpantesters.org/?dist=Pod-Weaver-Plugin-StopWords>
-
-=item *
-
-CPAN Testers Dependencies
-
-The CPAN Testers Dependencies is a website that shows a chart of the test results of all dependencies for a distribution.
-
-L<http://deps.cpantesters.org/?module=Pod::Weaver::Plugin::StopWords>
+L<http://metacpan.org/release/Pod-Weaver-Plugin-StopWords>
 
 =back
 
@@ -450,6 +411,10 @@ L<https://github.com/rwstauner/Pod-Weaver-Plugin-StopWords>
 
 Randy Stauner <rwstauner@cpan.org>
 
+=head1 CONTRIBUTOR
+
+Apocalypse <apocal@cpan.org>
+
 =head1 COPYRIGHT AND LICENSE
 
 This software is copyright (c) 2010 by Randy Stauner.
@@ -458,4 +423,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

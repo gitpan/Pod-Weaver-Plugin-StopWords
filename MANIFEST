@@ -10,7 +10,7 @@ dist.ini
 examples/weaver.ini
 lib/Pod/Weaver/Plugin/StopWords.pm
 t/00-compile.t
-t/000-report-versions-tiny.t
+t/00-report-prereqs.t
 t/basic.t
 t/eg/in.pod
 t/eg/out.pod
@@ -34,6 +34,7 @@ t/lib/TestPWEncoding.pm
 xt/author/critic.t
 xt/author/pod-spell.t
 xt/author/test-eol.t
+xt/release/changes_has_content.t
 xt/release/cpan-changes.t
 xt/release/dist-manifest.t
 xt/release/distmeta.t
