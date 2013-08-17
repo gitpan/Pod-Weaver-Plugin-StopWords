@@ -29,9 +29,9 @@ my %WriteMakefileArgs = (
     "warnings" => 0
   },
   "TEST_REQUIRES" => {
+    "Capture::Tiny" => 0,
     "Exporter" => 0,
     "ExtUtils::MakeMaker" => 0,
-    "File::Find" => 0,
     "File::Spec::Functions" => 0,
     "File::Temp" => 0,
     "List::Util" => 0,
@@ -45,9 +45,11 @@ my %WriteMakefileArgs = (
     "Software::License::Perl_5" => 0,
     "Test::Differences" => "0.500",
     "Test::MockObject" => "1.09",
-    "Test::More" => "0.96"
+    "Test::More" => "0.96",
+    "blib" => 0,
+    "lib" => 0
   },
-  "VERSION" => "1.006",
+  "VERSION" => "1.007",
   "test" => {
     "TESTS" => "t/*.t"
   }

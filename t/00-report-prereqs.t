@@ -10,9 +10,9 @@ use File::Spec::Functions;
 use List::Util qw/max/;
 
 my @modules = qw(
+  Capture::Tiny
   Exporter
   ExtUtils::MakeMaker
-  File::Find
   File::Spec::Functions
   File::Temp
   List::Util
@@ -31,6 +31,8 @@ my @modules = qw(
   Test::MockObject
   Test::More
   Text::Wrap
+  blib
+  lib
   namespace::autoclean
   perl
   strict
