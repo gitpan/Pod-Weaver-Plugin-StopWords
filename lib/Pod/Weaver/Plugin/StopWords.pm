@@ -11,9 +11,9 @@ use strict;
 use warnings;
 package Pod::Weaver::Plugin::StopWords;
 {
-  $Pod::Weaver::Plugin::StopWords::VERSION = '1.007';
+  $Pod::Weaver::Plugin::StopWords::VERSION = '1.008';
 }
-# git description: v1.006-2-g81a6df1
+# git description: v1.007-1-gb13b8d8
 
 BEGIN {
   $Pod::Weaver::Plugin::StopWords::AUTHORITY = 'cpan:RWSTAUNER';
@@ -205,7 +205,7 @@ __END__
 
 =pod
 
-=encoding utf-8
+=encoding UTF-8
 
 =for :stopwords Randy Stauner ACKNOWLEDGEMENTS Apocalypse Karen Etheridge <apocal@cpan.org>
 <ether@cpan.org> arrayrefs cpan testmatrix url annocpan anno bugtracker rt
@@ -217,7 +217,7 @@ Pod::Weaver::Plugin::StopWords - Dynamically add stopwords to your woven pod
 
 =head1 VERSION
 
-version 1.007
+version 1.008
 
 =head1 SYNOPSIS
 
