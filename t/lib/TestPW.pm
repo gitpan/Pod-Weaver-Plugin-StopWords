@@ -4,13 +4,16 @@ use strict;
 use warnings;
 use Exporter;
 our @ISA = qw(Exporter);
-our @EXPORT = qw(slurp_file test_basic weaver_input);
+our @EXPORT = qw(
+  slurp_file
+  test_basic weaver_input
+  compare_pod_ok
+);
 our $Data = do { local $/; <DATA> };
 
 use Test::More 0.96;
 use Test::Differences 0.500;
 use Test::MockObject 1.09;
-use Moose::Autobox 0.10;
 
 use PPI;
 
@@ -54,7 +57,8 @@ sub test_basic {
   # copied/modified from Pod::Weaver tests (Pod-Weaver-3.101632/t/basic.t)
   my $woven = $weaver->weave_document($input);
 
-  is($woven->children->length, $paragraphs, "we end up with a $paragraphs-paragraph document");
+  is(scalar(@{ $woven->children }), $paragraphs,
+    "we end up with a $paragraphs-paragraph document");
 
   for ( @nestedh1s ) {
     my $para = $woven->children->[ $_ ];
@@ -69,13 +73,27 @@ sub test_basic {
     "the version is in the version section",
   );
 
-  # XXX: This test is extremely risky as things change upstream.
-  # -- rjbs, 2009-10-23
-  eq_or_diff(
+  compare_pod_ok(
     $woven->as_pod_string,
     $expected,
     "exactly the pod string we wanted after weaving!",
   );
+}
+
+sub compare_pod_ok {
+  my ($got, $exp, $desc) = @_;
+  # As it says in the pod weaver tests:
+  # XXX: This test is extremely risky as things change upstream.
+
+  eq_or_diff( normalize($got), normalize($exp), $desc );
+}
+
+sub normalize {
+  local $_ = $_[0];
+  # Pod::Elemental 0.103003 has a bug that produces an extra newline...
+  # It was fixed in the next version, but who cares about an extra newline...
+  s/\n+/\n/sg;
+  return $_;
 }
 
 sub weaver_input {

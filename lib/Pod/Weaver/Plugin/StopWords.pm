@@ -10,15 +10,12 @@
 use strict;
 use warnings;
 package Pod::Weaver::Plugin::StopWords;
-# git description: v1.008-2-g12014df
-$Pod::Weaver::Plugin::StopWords::VERSION = '1.009';
-BEGIN {
-  $Pod::Weaver::Plugin::StopWords::AUTHORITY = 'cpan:RWSTAUNER';
-}
-# ABSTRACT: Dynamically add stopwords to your woven pod
+# git description: v1.009-2-gec77fe5
 
+our $AUTHORITY = 'cpan:RWSTAUNER';
+# ABSTRACT: Dynamically add stopwords to your woven pod
+$Pod::Weaver::Plugin::StopWords::VERSION = '1.010';
 use Moose;
-use Moose::Autobox;
 use namespace::autoclean;
 
 use Pod::Weaver 3.101632 ();
@@ -182,8 +179,9 @@ sub splice_stopwords_from_children {
     next unless $para->isa('Pod::Elemental::Element::Pod5::Region')
       and $para->format_name eq 'stopwords';
 
-    push(@stopwords,
-      map { split(/\s+/, $_->content) } $para->children->flatten);
+    push @stopwords,
+      map { split(/\s+/, $_->content) }
+        @{ $para->children };
 
     # remove paragraph from document since we've copied all of its stopwords
     splice(@$children, $i, 1);
@@ -214,7 +212,7 @@ Pod::Weaver::Plugin::StopWords - Dynamically add stopwords to your woven pod
 
 =head1 VERSION
 
-version 1.009
+version 1.010
 
 =head1 SYNOPSIS
 
@@ -394,7 +392,7 @@ L<http://metacpan.org/release/Pod-Weaver-Plugin-StopWords>
 =head2 Bugs / Feature Requests
 
 Please report any bugs or feature requests by email to C<bug-pod-weaver-plugin-stopwords at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Pod-Weaver-Plugin-StopWords>. You will be automatically notified of any
+the web interface at L<https://rt.cpan.org/Public/Bug/Report.html?Queue=Pod-Weaver-Plugin-StopWords>. You will be automatically notified of any
 progress on the request by the system.
 
 =head2 Source Code
